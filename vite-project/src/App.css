@@ -1,0 +1,6 @@
+.custom-table .ant-table-thead > tr > th {
+  background-color: #1890ff; /* Đổi màu nền */
+  color: black; /* Đổi màu chữ */
+  font-weight: bold; /* Đổi độ dày của chữ */
+  text-align: center; /* Căn giữa văn bản */
+}
