@@ -95,16 +95,16 @@ const App = () => {
     },
   });
 
-  const defaultCheckedList = columns.map((item) => item.key);
-  const [checkedList, setCheckedList] = useState(defaultCheckedList);
-  const options = columns.map(({ key, title }) => ({
-    label: title,
-    value: key,
-  }));
-  const newColumns = columns.map((item) => ({
-    ...item,
-    hidden: !checkedList.includes(item.key),
-  }));
+  // const defaultCheckedList = columns.map((item) => item.key);
+  // const [checkedList, setCheckedList] = useState(defaultCheckedList);
+  // const options = columns.map(({ key, title }) => ({
+  //   label: title,
+  //   value: key,
+  // }));
+  // const newColumns = columns.map((item) => ({
+  //   ...item,
+  //   hidden: !checkedList.includes(item.key),
+  // }));
 
   const columns = [
     {
@@ -212,17 +212,17 @@ const App = () => {
 
   return (
     <div>
-      <Divider>Columns displayed</Divider>
+      {/* <Divider>Columns displayed</Divider>
       <Checkbox.Group
         value={checkedList}
         options={options}
         onChange={(value) => {
           setCheckedList(value);
         }}
-      />
+      /> */}
 
       <Table
-        columns={newColumns}
+        columns={columns}
         dataSource={data}
         onChange={handleTableChange}
         loading={loading}
