@@ -154,7 +154,7 @@ const App = () => {
       ...getColumnSearchProps("order_status"),
       render: (text) => {
         let color =
-          text === "pending" ? "volcano" : text === "Approved" ? "green" : "";
+          text === "pending" ? "volcano" : text === "success" ? "green" : "red";
         return <Tag color={color}>{text}</Tag>;
       },
     },
@@ -191,8 +191,17 @@ const App = () => {
   };
 
   const handleTableChange = (pagination, filters, sorter) => {
+    //If change page size else back a apage 1
+    const newPagination = {
+      ...pagination,
+      current:
+        pagination.pageSize !== tableParams.pagination?.pageSize
+          ? 1
+          : pagination.current,
+    };
+
     setTableParams({
-      pagination,
+      pagination: newPagination,
       filters,
       sorter,
     });
@@ -229,6 +238,8 @@ const App = () => {
         pagination={tableParams.pagination}
         bordered={true} // Chia cột
         className="custom-table"
+        //scroll
+        scroll={{ y: "70vh" }} // Set the height for vertical scrolling
         scrollToFirstRowOnChange={true}
       />
     </div>
