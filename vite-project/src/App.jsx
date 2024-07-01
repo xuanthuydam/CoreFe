@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Table, Input, Button, Space, Tag, Checkbox, Divider } from "antd";
+import {
+  Table,
+  Input,
+  Button,
+  Space,
+  Tag,
+  Checkbox,
+  Divider,
+  Tooltip,
+} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import QRCode from "qrcode.react";
 import "./App.css";
 
 const App = () => {
@@ -106,6 +116,32 @@ const App = () => {
   //   hidden: !checkedList.includes(item.key),
   // }));
 
+  const ImageWithTooltip = ({ url }) => {
+    const [visible, setVisible] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => setLoaded(true);
+    }, [url]);
+
+    return (
+      <Tooltip
+        visible={visible}
+        title={<img src={url} alt="preview" style={{ width: 200 }} />}
+        placement="right"
+      >
+        <span
+          onMouseEnter={() => setVisible(true)}
+          onMouseLeave={() => setVisible(false)}
+        >
+          {loaded ? "View QR" : "Loading..."}
+        </span>
+      </Tooltip>
+    );
+  };
+
   const columns = [
     {
       key: "scode",
@@ -157,6 +193,12 @@ const App = () => {
           text === "pending" ? "volcano" : text === "success" ? "green" : "red";
         return <Tag color={color}>{text}</Tag>;
       },
+    },
+    {
+      key: "url",
+      title: "QR",
+      dataIndex: "url",
+      render: (text, record) => <ImageWithTooltip url={record.url} />,
     },
   ];
 
