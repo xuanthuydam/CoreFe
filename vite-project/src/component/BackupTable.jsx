@@ -128,7 +128,7 @@ const App = () => {
       };
 
       const result = await axios.post(
-        "https://paymentapi-5875fa5873a8.herokuapp.com/api/post/filter/withdrawal",
+        "https://paymentapi-5875fa5873a8.herokuapp.com/api/bank",
         param
       );
 

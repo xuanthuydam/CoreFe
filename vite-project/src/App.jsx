@@ -11,9 +11,10 @@ import {
   Tooltip,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import QRCode from "qrcode.react";
-import columns from "./columns_table/order.jsx";
 import "./App.css";
+import TotalDepositAndWithdrawal from "./component/TotalDepositAndWithdrawal";
+import HandleSearch from "./component/HandleSearch";
+import HandleDateTimeRange from "./component/HandleDateTimeRange";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -24,7 +25,9 @@ const App = () => {
     pagination: {
       current: 1,
       pageSize: 10,
-      total: 200,
+      total: 0,
+      // showQuickJumper: true,
+      //showTotal: (total) => `Total ${total} items`,
     },
     filters: {},
   });
@@ -106,6 +109,105 @@ const App = () => {
     },
   });
 
+  const columns = [
+    // {
+    //   key: "id",
+    //   title: "Id",
+    //   dataIndex: "id",
+    //   sorter: (a, b) => a.money - b.money,
+    //   ...getColumnSearchProps("id"),
+    // },
+    {
+      key: "status",
+      title: "Status",
+      dataIndex: "status",
+      sorter: (a, b) => a.status.localeCompare(b.status),
+      ...getColumnSearchProps("status"),
+      render: (text) => {
+        let color = text.includes("success")
+          ? "green"
+          : text.includes("err")
+          ? "red"
+          : "warning";
+        return text !== "" ? <Tag color={color}>{text}</Tag> : null;
+      },
+    },
+    {
+      key: "bankCode",
+      title: "Bank code",
+      dataIndex: "bankCode",
+      sorter: (a, b) => a.bankCode.localeCompare(b.bankCode),
+      ...getColumnSearchProps("bankCode"),
+    },
+    {
+      key: "accountNumber",
+      title: "Account number",
+      dataIndex: "accountNumber",
+      sorter: (a, b) => a.accountNumber - b.accountNumber,
+      ...getColumnSearchProps("accountNumber"),
+    },
+    {
+      key: "accountName",
+      title: "Account name",
+      dataIndex: "accountName",
+      sorter: (a, b) => a.accountName.localeCompare(b.accountName),
+      ...getColumnSearchProps("accountName"),
+    },
+    {
+      key: "type",
+      title: "Type",
+      dataIndex: "type",
+      sorter: (a, b) => a.type.localeCompare(b.type),
+      ...getColumnSearchProps("type"),
+      render: (text) => {
+        let color = text === "deposit" ? "green" : "red";
+        return <Tag color={color}>{text}</Tag>;
+      },
+    },
+    {
+      key: "money",
+      title: "Money",
+      dataIndex: "money",
+      sorter: (a, b) => a.money - b.money,
+      ...getColumnSearchProps("money"),
+      render: (text) => {
+        return parseInt(text)?.toLocaleString();
+      },
+    },
+    {
+      key: "memo",
+      title: "Memo",
+      dataIndex: "memo",
+      sorter: (a, b) => a.memo.localeCompare(b.memo),
+      ...getColumnSearchProps("memo"),
+      ellipsis: true,
+    },
+    {
+      key: "memo_code",
+      title: "Memo code",
+      dataIndex: "memo_code",
+      sorter: (a, b) => a.memo_code.localeCompare(b.memo_code),
+      ...getColumnSearchProps("memo_code"),
+    },
+    {
+      key: "balance",
+      title: "Balance",
+      dataIndex: "balance",
+      sorter: (a, b) => a.balance.localeCompare(b.balance),
+      ...getColumnSearchProps("balance"),
+      render: (text) => {
+        return parseInt(text)?.toLocaleString();
+      },
+    },
+    {
+      key: "createdAt",
+      title: "Create at",
+      dataIndex: "createdAt",
+      sorter: (a, b) => new Date(a.time_order) - new Date(b.time_order),
+      ...getColumnSearchProps("createdAt"),
+    },
+  ];
+
   // const defaultCheckedList = columns.map((item) => item.key);
   // const [checkedList, setCheckedList] = useState(defaultCheckedList);
   // const options = columns.map(({ key, title }) => ({
@@ -119,6 +221,7 @@ const App = () => {
 
   const handlePostRequest = async () => {
     try {
+      // console.log("param", param.tableParams.filters);
       setLoading(true);
 
       const param = {
@@ -128,12 +231,12 @@ const App = () => {
       };
 
       const result = await axios.post(
-        "https://paymentapi-5875fa5873a8.herokuapp.com/api/post/filter/withdrawal",
+        "https://paymentapi-5875fa5873a8.herokuapp.com/api/bank",
         param
       );
 
       setLoading(false);
-      setData(result?.data?.data);
+      setData(result?.data);
       setTableParams({
         ...tableParams,
         pagination: {
@@ -147,8 +250,23 @@ const App = () => {
     }
   };
 
+  const handleFilters = (newFilters) => {
+    console.log("newFilters", newFilters);
+    setTableParams({
+      ...tableParams,
+      pagination: {
+        current: 1,
+        pageSize: 10,
+      },
+      filters: newFilters,
+    });
+  };
+
   const handleTableChange = (pagination, filters, sorter) => {
     //If change page size else back a apage 1
+    console.log("pagination", pagination);
+    console.log("pagination", filters);
+    console.log(sorter);
     const newPagination = {
       ...pagination,
       current:
@@ -186,10 +304,11 @@ const App = () => {
           setCheckedList(value);
         }}
       /> */}
-
+      <HandleDateTimeRange onSearch={handleFilters} />
+      <TotalDepositAndWithdrawal data={data} />
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={data?.data}
         onChange={handleTableChange}
         loading={loading}
         pagination={tableParams.pagination}
@@ -198,6 +317,7 @@ const App = () => {
         //scroll
         scroll={{ y: "70vh" }} // Set the height for vertical scrolling
         scrollToFirstRowOnChange={true}
+        sc
       />
     </div>
   );
