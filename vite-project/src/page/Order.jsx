@@ -9,6 +9,8 @@ import {
   Checkbox,
   Divider,
   Tooltip,
+  Row,
+  Col,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import ImageWithTooltip from "../component/ImageWithTooltip";
@@ -104,12 +106,17 @@ const Order = () => {
         record.status_bank === "pending" && (
           <Space>
             <ImageWithTooltip url={record.url} />
-            <Button
-              type="primary"
-              onClick={() => handleButtonClick(record.orderid)}
-            >
-              success
-            </Button>
+            <Row gutter={[16, 16]}>
+              <Col xs={18} sm={14} md={16} lg={16} xl={24}>
+                <Button
+                  type="primary"
+                  onClick={() => handleButtonClick(record.orderid)}
+                  style={{ width: "100%" }}
+                >
+                  Success
+                </Button>
+              </Col>
+            </Row>
           </Space>
         ),
       responsive: ["xs", "sm", "md", "lg", "xl"],
