@@ -88,6 +88,7 @@ const Order = () => {
           text === "pending" ? "volcano" : text === "success" ? "green" : "red";
         return <Tag color={color}>{text}</Tag>;
       },
+      responsive: ["xs", "sm", "md", "lg", "xl"],
     },
     // {
     //   key: "scode",
@@ -111,6 +112,7 @@ const Order = () => {
             </Button>
           </Space>
         ),
+      responsive: ["xs", "sm", "md", "lg", "xl"],
     },
     {
       key: "orderid",
@@ -118,6 +120,7 @@ const Order = () => {
       dataIndex: "orderid",
       sorter: (a, b) => a.orderid.localeCompare(b.orderid),
       ...getColumnSearchProps("orderid"),
+      responsive: ["sm", "md", "lg", "xl"],
     },
     {
       key: "time_order",
@@ -125,12 +128,14 @@ const Order = () => {
       dataIndex: "time_order",
       sorter: (a, b) => new Date(a.time_order) - new Date(b.time_order),
       ...getColumnSearchProps("time_order"),
+      responsive: ["sm", "md", "lg", "xl"],
     },
     {
       key: "bank_name",
       title: "Bank name",
       dataIndex: "bank_name",
       ...getColumnSearchProps("bank_name"),
+      responsive: ["md", "lg", "xl"],
     },
     { key: "bank_no", title: "Bank no", dataIndex: "bank_no" },
     {
@@ -138,6 +143,7 @@ const Order = () => {
       title: "Account name",
       dataIndex: "account_name",
       ...getColumnSearchProps("account_name"),
+      responsive: ["md", "lg", "xl"],
     },
     {
       key: "money",
@@ -145,6 +151,7 @@ const Order = () => {
       dataIndex: "money",
       sorter: (a, b) => a.money - b.money,
       ...getColumnSearchProps("money"),
+      responsive: ["lg", "xl"],
     },
     {
       key: "status_p2p",
@@ -156,6 +163,7 @@ const Order = () => {
           text === "pending" ? "volcano" : text === "success" ? "green" : "red";
         return <Tag color={color}>{text}</Tag>;
       },
+      responsive: ["lg", "xl"],
     },
   ];
 

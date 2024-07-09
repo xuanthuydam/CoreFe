@@ -121,6 +121,7 @@ const App = () => {
           : "warning";
         return text !== "" ? <Tag color={color}>{text}</Tag> : null;
       },
+      responsive: ["xs", "sm", "md", "lg", "xl"],
     },
     {
       key: "bankCode",
@@ -128,6 +129,7 @@ const App = () => {
       dataIndex: "bankCode",
       sorter: (a, b) => a.bankCode.localeCompare(b.bankCode),
       ...getColumnSearchProps("bankCode"),
+      responsive: ["xs", "sm", "md", "lg", "xl"],
     },
     {
       key: "accountNumber",
@@ -135,6 +137,7 @@ const App = () => {
       dataIndex: "accountNumber",
       sorter: (a, b) => a.accountNumber - b.accountNumber,
       ...getColumnSearchProps("accountNumber"),
+      responsive: ["sm", "md", "lg", "xl"],
     },
     {
       key: "accountName",
@@ -142,6 +145,7 @@ const App = () => {
       dataIndex: "accountName",
       sorter: (a, b) => a.accountName.localeCompare(b.accountName),
       ...getColumnSearchProps("accountName"),
+      responsive: ["sm", "md", "lg", "xl"],
     },
     {
       key: "type",
@@ -153,6 +157,7 @@ const App = () => {
         let color = text === "deposit" ? "green" : "red";
         return <Tag color={color}>{text}</Tag>;
       },
+      responsive: ["md", "lg", "xl"],
     },
     {
       key: "money",
@@ -163,6 +168,7 @@ const App = () => {
       render: (text) => {
         return parseInt(text)?.toLocaleString();
       },
+      responsive: ["md", "lg", "xl"],
     },
     {
       key: "memo",
@@ -171,6 +177,7 @@ const App = () => {
       sorter: (a, b) => a.memo.localeCompare(b.memo),
       ...getColumnSearchProps("memo"),
       ellipsis: true,
+      responsive: ["lg", "xl"],
     },
     {
       key: "memo_code",
@@ -178,6 +185,7 @@ const App = () => {
       dataIndex: "memo_code",
       sorter: (a, b) => a.memo_code.localeCompare(b.memo_code),
       ...getColumnSearchProps("memo_code"),
+      responsive: ["lg", "xl"],
     },
     {
       key: "balance",
@@ -188,6 +196,7 @@ const App = () => {
       render: (text) => {
         return parseInt(text)?.toLocaleString();
       },
+      responsive: ["lg", "xl"],
     },
     {
       key: "createdAt",
@@ -195,6 +204,7 @@ const App = () => {
       dataIndex: "createdAt",
       sorter: (a, b) => new Date(a.time_order) - new Date(b.time_order),
       ...getColumnSearchProps("createdAt"),
+      responsive: ["lg", "xl"],
     },
   ];
 
