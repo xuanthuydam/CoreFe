@@ -4,3 +4,52 @@
   font-weight: bold; /* Đổi độ dày của chữ */
   text-align: center; /* Căn giữa văn bản */
 }
+
+/* @media (max-width: 1200px) {
+  .ant-layout-sider {
+    display: none; /* Ẩn Sider khi màn hình nhỏ hơn 1200px */
+  }
+} */
+
+/* .demo-logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  flex: 1;
+  min-width: 0;
+}
+
+.breadcrumb {
+  margin: 16px 0;
+}
+
+.content-padding {
+  padding: 0 48px;
+}
+
+.inner-layout {
+  padding: 24px 0;
+}
+
+.sider {
+  height: 100%;
+}
+
+.content {
+  padding: 0 24px;
+  min-height: 280px;
+}
+
+.footer {
+  text-align: center;
+} */

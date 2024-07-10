@@ -137,7 +137,7 @@ const App = () => {
       dataIndex: "accountNumber",
       sorter: (a, b) => a.accountNumber - b.accountNumber,
       ...getColumnSearchProps("accountNumber"),
-      responsive: ["sm", "md", "lg", "xl"],
+      responsive: ["md", "lg", "xl"],
     },
     {
       key: "accountName",
@@ -145,7 +145,7 @@ const App = () => {
       dataIndex: "accountName",
       sorter: (a, b) => a.accountName.localeCompare(b.accountName),
       ...getColumnSearchProps("accountName"),
-      responsive: ["sm", "md", "lg", "xl"],
+      responsive: ["md", "lg", "xl"],
     },
     {
       key: "type",
@@ -315,7 +315,7 @@ const App = () => {
         bordered={true} // Chia cột
         className="custom-table"
         //scroll
-        scroll={{ y: "70vh" }} // Set the height for vertical scrolling
+        scroll={{ y: "40vh" }} // Set the height for vertical scrolling
         scrollToFirstRowOnChange={true}
         sc
       />
